@@ -107,7 +107,6 @@ $(document).ready(function () {
             data: { 
                 "name": name,
                 "email": email,
-                "company": company,
                 "phone": phone,
                 "message": message,
             },

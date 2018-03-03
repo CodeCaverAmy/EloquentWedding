@@ -5,7 +5,6 @@ if ( isAjax() ) {
 	if ( isset($_POST) && !empty($_POST['name']) && !empty($_POST['email']) ) { //Checks if action value exists
 	    $name 		= $_POST["name"];
 	    $email 		= $_POST["email"];
-	    $company 	= !empty( $_POST["company"] ) ? $_POST["company"] : null;
 	    $phone 		= !empty( $_POST["phone"] ) ? $_POST["phone"] : null;
 	    $message 	= !empty( $_POST["message"] ) ? $_POST["message"] : null;
 
