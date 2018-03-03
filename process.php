@@ -9,7 +9,7 @@ if ( isAjax() ) {
 	    $message 	= !empty( $_POST["message"] ) ? $_POST["message"] : null;
 
 	    //prepare and send mail
-		$to 	= "mjbrummitt@mac.com";
+		$to 	= "amyplant@me.com";
 		$subject= "Submission from Eloquent Wedding";
 		$headers= "From: {$email}" . "\r\n";
 		$txt 	= $message;

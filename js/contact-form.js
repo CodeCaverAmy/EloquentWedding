@@ -94,7 +94,6 @@ $(document).ready(function () {
         },
         success: function (data, textStatus, jqXHR) {
           if (jqXHR.responseJSON.status) {
-            console.log('mail sent: ' + data.mailSent);
             if (data.mailSent) {
               /*reset the form*/
               $(form)[0].reset();
@@ -107,7 +106,7 @@ $(document).ready(function () {
               $('input#submit').attr('value', 'Message Sent');
             } else {
               $(target).removeClass('hidden').removeClass('alert-success').addClass('alert-danger');
-              $(target).text(jqXHR.responseJSON.status);
+              $(target).text(data.mailSent);
               $('input#submit').attr('value', 'Message Failed to Send');
             }
           } else {
