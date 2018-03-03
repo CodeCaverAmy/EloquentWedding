@@ -104,9 +104,10 @@ $(document).ready(function () {
               /*show success message*/
               $(target).removeClass('hidden').removeClass('alert-danger').addClass('alert-success');
               $(target).text(sucMsg);
+              $('input#submit').attr('value', 'Message Sent');
             } else {
               $(target).removeClass('hidden').removeClass('alert-success').addClass('alert-danger');
-              $(target).text(sucMsg);
+              $(target).text(textStatus);
             }
           } else {
             alert(jqXHR.responseJSON.message);
