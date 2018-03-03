@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     /*messages for guests*/
     var target = '#alert';
-    var errMsg = 'Error! Could not contact server';
+    var errMsg = 'Oops, having problems sending messages at the moment.';
     var sucMsg = "Thanks! Your message has been received. Someone will get back to you.";
     var nameError = "Name is required";
     var emailError = "Email is required";
@@ -21,10 +21,10 @@ $(document).ready(function () {
     var messageError = "Message is required";
     var messageShortError = "Message is too short";
 
-    function validate(nm, em, msg, phn) {
+    function validate(name, email, message, phone) {
       $(target).removeClass('alert-success')
 
-      if (nm == "") {
+      if (name == "") {
         $("input#name").parent('div').addClass('has-error');
         $(target).removeClass('hidden').addClass('alert-danger');
         $(target).text(nameError);
@@ -34,7 +34,7 @@ $(document).ready(function () {
       }
       $("input#name").parent('div').removeClass('has-error');
 
-      if (em == "") {
+      if (email == "") {
         $("input#email").parent('div').addClass('has-error');
         $(target).removeClass('hidden').addClass('alert-danger');
         $(target).text(emailError);
@@ -44,7 +44,7 @@ $(document).ready(function () {
       }
       $("input#email").parent('div').removeClass('has-error');
 
-      if (phn == "") {
+      if (phone == "") {
         $("input#phone").parent('div').addClass('has-error');
         $(target).removeClass('hidden').addClass('alert-danger');
         $(target).text(phoneError);
@@ -54,7 +54,7 @@ $(document).ready(function () {
       }
       $("input#phn").parent('div').removeClass('has-error');
 
-      if (msg == "") {
+      if (message == "") {
         $("textarea#message").parent('div').addClass('has-error');
         $(target).removeClass('hidden').addClass('alert-danger');
         $(target).text(messageError);
@@ -62,7 +62,7 @@ $(document).ready(function () {
         resetSubmit();
         return false;
         //check message length
-      } else if (msg.length < 10) {
+      } else if (message.length < 10) {
         $(target).removeClass('hidden').addClass('alert-danger');
         $(target).text(messageShortError);
         $("textarea#message").focus();
@@ -90,10 +90,11 @@ $(document).ready(function () {
           "name": name,
           "email": email,
           "phone": phone,
-          "message": message,
+          "message": message
         },
         success: function (data, textStatus, jqXHR) {
           if (jqXHR.responseJSON.status) {
+            console.log('mail sent: ' + data.mailSent);
             if (data.mailSent) {
               /*reset the form*/
               $(form)[0].reset();
@@ -106,7 +107,7 @@ $(document).ready(function () {
               $('input#submit').attr('value', 'Message Sent');
             } else {
               $(target).removeClass('hidden').removeClass('alert-success').addClass('alert-danger');
-              $(target).text(jqXHR.responseJSON.message);
+              $(target).text(jqXHR.responseJSON.status);
               $('input#submit').attr('value', 'Message Failed to Send');
             }
           } else {
