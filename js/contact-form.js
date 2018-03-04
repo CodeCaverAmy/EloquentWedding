@@ -85,15 +85,20 @@ $(document).ready(function () {
             url: "https://formspree.io/mjbrummitt@mac.com", 
             method: "POST",
             data: {
-              "name": name,
-              "email": email,
-              "phone": phone,
-              "message": message,
-              "_replyto": email,
-              "_next": "/thankyou.html",
-              "_subject": "New message from Eloquent Wedding"
+              name: name,
+              email: email,
+              phone: phone,
+              message: message,
+              _replyto: email,
+              _next: "/thankyou.html",
+              _subject: "New message from Eloquent Wedding"
             },
-            dataType: "json"
+            dataType: "json",
+            success:function() {
+              console.log('success'); 
+              // $('#formBlock').hide();
+              // $('#thankyouBlock').show();
+          }   
         });
     }
   });
