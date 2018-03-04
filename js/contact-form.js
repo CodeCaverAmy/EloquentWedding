@@ -95,7 +95,7 @@ $(document).ready(function () {
         dataType: "json",
         success: function () {
           /*reset the form*/
-          $(form)[0].reset();
+          $(contactform)[0].reset();
           /*reset button*/
           resetSubmit();
           /*show success message*/
