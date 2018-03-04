@@ -1,15 +1,14 @@
 $(document).ready(function () {
 
-  var form = '#contactForm';
+  var contactform =  document.getElementById('contactForm');
 
-  $(form).on('submit', function (e) {
+  $(contactform).on('submit', function (e) {
     e.preventDefault();
     $('input#submit').attr('value', 'Processing..');
     var name = $("input#name").val();
     var email = $("input#email").val();
     var phone = $("input#phone").val();
     var message = $("textarea#message").val();
-    var route = "process.php";
 
     /*messages for guests*/
     var target = '#alert';
@@ -81,45 +80,21 @@ $(document).ready(function () {
     }
 
     if (validate(name, email, message, phone) == true) {
-      /*process the form*/
-      var jqxhr = $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: route,
-        data: {
-          "name": name,
-          "email": email,
-          "phone": phone,
-          "message": message
-        },
-        success: function (data, textStatus, jqXHR) {
-          if (jqXHR.responseJSON.status) {
-            if (data.mailSent) {
-              /*reset the form*/
-              $(form)[0].reset();
-              /*reset button*/
-              resetSubmit();
-
-              /*show success message*/
-              $(target).removeClass('hidden').removeClass('alert-danger').addClass('alert-success');
-              $(target).text(sucMsg);
-              $('input#submit').attr('value', 'Message Sent');
-            } else {
-              $(target).removeClass('hidden').removeClass('alert-success').addClass('alert-danger');
-              $(target).text(data.mailSent);
-              $('input#submit').attr('value', 'Message Failed to Send');
-            }
-          } else {
-            alert(jqXHR.responseJSON.message);
-          }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          resetSubmit();
-          /*alert( textStatus + " " + errorThrown );*/
-          $(target).removeClass('hidden').removeClass('alert-success').addClass('alert-danger');
-          $(target).text(errMsg);
-        }
-      })
+      console.log('all fields completed');
+       $.ajax({
+            url: "https://formspree.io/mjbrummitt@mac.com", 
+            method: "POST",
+            data: {
+              "name": name,
+              "email": email,
+              "phone": phone,
+              "message": message,
+              "_replyto": email,
+              "_next": "/thankyou.html",
+              "_subject": "New message from Eloquent Wedding"
+            },
+            dataType: "json"
+        });
     }
   });
 });
