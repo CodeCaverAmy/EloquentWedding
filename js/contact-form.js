@@ -82,7 +82,7 @@ $(document).ready(function () {
     if (validate(name, email, message, phone) == true) {
       console.log('all fields completed');
        $.ajax({
-            url: "https://formspree.io/mjbrummitt@mac.com", 
+            url: 'https://formspree.io/xjwoldgm', 
             method: "POST",
             data: {
               name: name,
