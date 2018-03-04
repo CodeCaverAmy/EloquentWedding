@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-  var contactform =  document.getElementById('contactForm');
+  var contactform = document.getElementById('contactForm');
+  var thankyou = document.getElementById('thankyou');
 
   $(contactform).on('submit', function (e) {
     e.preventDefault();
@@ -80,26 +81,33 @@ $(document).ready(function () {
     }
 
     if (validate(name, email, message, phone) == true) {
-      console.log('all fields completed');
-       $.ajax({
-            url: 'https://formspree.io/xjwoldgm', 
-            method: "POST",
-            data: {
-              name: name,
-              email: email,
-              phone: phone,
-              message: message,
-              _replyto: email,
-              _next: "/thankyou.html",
-              _subject: "New message from Eloquent Wedding"
-            },
-            dataType: "json",
-            success:function() {
-              console.log('success'); 
-              // $('#formBlock').hide();
-              // $('#thankyouBlock').show();
-          }   
-        });
+      $.ajax({
+        url: 'https://formspree.io/xjwoldgm',
+        method: "POST",
+        data: {
+          name: name,
+          email: email,
+          phone: phone,
+          message: message,
+          _replyto: email,
+          _subject: "New message from Eloquent Wedding"
+        },
+        dataType: "json",
+        success: function () {
+          /*reset the form*/
+          $(form)[0].reset();
+          /*reset button*/
+          resetSubmit();
+          /*show success message*/
+          $(target).removeClass('hidden').removeClass('alert-danger').addClass('alert-success');
+          $(target).text(sucMsg);
+        }, 
+        error: function () {
+          resetSubmit();
+          $(target).removeClass('hidden').removeClass('alert-success').addClass('alert-danger');
+          $(target).text( errMsg );
+        }
+      });
     }
   });
 });
