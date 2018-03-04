@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
   var contactform = document.getElementById('contactForm');
-  var thankyou = document.getElementById('thankyou');
 
   $(contactform).on('submit', function (e) {
     e.preventDefault();
@@ -14,7 +13,7 @@ $(document).ready(function () {
     /*messages for guests*/
     var target = '#alert';
     var errMsg = 'Oops, having problems sending messages at the moment.';
-    var sucMsg = "Thanks! Your message has been received. Someone will get back to you.";
+    var sucMsg = "Thanks! I will respond to you within 24 hours.";
     var nameError = "Name is required";
     var emailError = "Email is required";
     var phoneError = "Phone is required";
