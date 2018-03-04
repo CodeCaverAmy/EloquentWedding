@@ -81,7 +81,7 @@ $(document).ready(function () {
 
     if (validate(name, email, message, phone) == true) {
       $.ajax({
-        url: 'https://formspree.io/xjwoldgm',
+        url: 'https://formspree.io/xzrvqlqx',
         method: "POST",
         data: {
           name: name,
